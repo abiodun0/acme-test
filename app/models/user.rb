@@ -16,4 +16,5 @@ class User < ApplicationRecord
         hits.where('created_at > ?', start).count
     end
     return hits_count
+  end
 end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'user/all'
   get 'user/:id', to: 'user#show'
-  get 'user/:id/hit_endpoint(/:time_zone)', to: 'user#hit_endpoint'
+  post 'user/:id/hit_endpoint(/:time_zone)', to: 'user#hit_endpoint'
 
 
 

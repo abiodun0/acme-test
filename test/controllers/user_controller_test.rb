@@ -25,7 +25,7 @@ class UserControllerTest < ActionDispatch::IntegrationTest
 
   test "Test over quota limit from current user model" do
     User.any_instance.expects(:count_hits).returns(300000)
-    get "/user/#{User.first.id}/hit_endpoint"
+    post "/user/#{User.first.id}/hit_endpoint"
     body = JSON.parse(response.body)
     assert_equal "over quota", body["error"]
   end
@@ -34,7 +34,7 @@ class UserControllerTest < ActionDispatch::IntegrationTest
     User.any_instance.expects(:count_hits).returns(1000)
     user = User.first
     count = user.hits.count
-    get "/user/#{User.first.id}/hit_endpoint"
+    post "/user/#{User.first.id}/hit_endpoint"
     body = JSON.parse(response.body)
     assert_response :success
     # Asserts that the hit counts increases
@@ -46,7 +46,7 @@ class UserControllerTest < ActionDispatch::IntegrationTest
     User.any_instance.expects(:count_hits).returns(1000)
     user = User.first
     count = user.hits.count
-    get "/user/#{User.first.id}/hit_endpoint/Sydney"
+    post "/user/#{User.first.id}/hit_endpoint/Sydney"
     body = JSON.parse(response.body)
     assert_response :success
     # Asserts that the hit counts increases
