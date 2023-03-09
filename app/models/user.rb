@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
 	has_many :hits
-    has_many :monthly_hits, -> { where('hits.created_at > ?', Time.now.beginning_of_month.in_time_zone(self.time_zone).utc) }, class_name: 'Hit'
+    has_many :monthly_hits, ->(time_zone) { where('hits.created_at > ?', Time.now.beginning_of_month.in_time_zone(time_zone).utc) }, class_name: 'Hit'
 
 	def old_count_hits
 		start = Time.now.beginning_of_month
